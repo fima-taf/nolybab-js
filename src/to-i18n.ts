@@ -4,7 +4,7 @@ import fs, { writeFileSync } from 'fs'
 
 
 export const processCsvToI18n = async (conf: Configuration) => {
-  console.log(chalk.blue('Starting csv-to-json process'))
+  console.log(chalk.blue('Starting csv-to-i18n process'))
 
   const translationsFilePath = `${conf.translationsFilePath}/${conf.translationsFileName}.${FileTypes.CSV}`
 
@@ -26,7 +26,7 @@ export const processCsvToI18n = async (conf: Configuration) => {
 
   await writeLanguageFiles(conf, langFiles)
 
-  console.log(chalk.blue('csv-to-json process has ended successfully'))
+  console.log(chalk.blue('csv-to-i18n process has ended successfully'))
 }
 
 export const convertCsvToArray = (csv: string, csvDelimiter: string) => {
@@ -59,7 +59,7 @@ export const convertRowsIntoObject = (rows: any[], langFiles: LanguageFile[]) =>
       const translationObjectKeys = convertNolybabKeyToArray(row[0])
       for (let j = 1; j < row.length; j++) {
         const langFilesIndex = j-1
-        langFiles[langFilesIndex].file = convertStringKeysToObjectKeys(translationObjectKeys, row[j], langFiles[langFilesIndex].file)
+        langFiles[langFilesIndex].file = setValueIntoObject(translationObjectKeys, row[j], langFiles[langFilesIndex].file)
       }
     }
   }
@@ -70,12 +70,12 @@ export const convertNolybabKeyToArray = (nolybabKey: string) => {
   return nolybabKey.split('.')
 }
 
-export const convertStringKeysToObjectKeys = (keys: string[], value: string, object: any): any => {
+export const setValueIntoObject = (keys: string[], value: string, object: any): any => {
   const keysCopy = Object.assign([], keys)
   const currentKey = keysCopy.shift()
   if (currentKey !== undefined) {
     if (keysCopy.length > 0) {
-      object[currentKey] = convertStringKeysToObjectKeys(keysCopy, value, object[currentKey] || {})
+      object[currentKey] = setValueIntoObject(keysCopy, value, object[currentKey] || {})
     } else {
       if (value) {
         object[currentKey] = value
@@ -86,7 +86,6 @@ export const convertStringKeysToObjectKeys = (keys: string[], value: string, obj
 }
 
 export const writeLanguageFiles = async (conf: Configuration, langFiles: LanguageFile[]) => {
-  const writeFilePromiseList: any[] = []
 
   const outputPathExists = fs.existsSync(conf.i18nFilesPath)
 
@@ -97,18 +96,7 @@ export const writeLanguageFiles = async (conf: Configuration, langFiles: Languag
   fs.mkdirSync(conf.i18nFilesPath)
   
   langFiles.forEach(lf => {
-    // writeFilePromiseList.push(writeFilePromise(conf, lf))
     fs.writeFileSync(`${conf.i18nFilesPath}/${lf.name}.${FileTypes.JSON}`, JSON.stringify(lf.file))
   })
 
-  // await Promise.all<any[]>(writeFilePromiseList)
-}
-
-const writeFilePromise = (conf: Configuration, lf: LanguageFile) => {
-  return new Promise<void>((resolve, reject) => {
-    fs.writeFile(`${conf.i18nFilesPath}/${lf.name}.${FileTypes.JSON}`, JSON.stringify(lf.file), (err) => {
-      if (err) reject(err)
-      else resolve()
-    })
-  })
 }

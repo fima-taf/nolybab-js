@@ -10,6 +10,7 @@ yarn-error.log*
 dist
 package-lock.json
 yarn.lock
+lib
 
 # Editor directories and files
 .idea

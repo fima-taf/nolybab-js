@@ -89,11 +89,9 @@ export const writeLanguageFiles = async (conf: Configuration, langFiles: Languag
 
   const outputPathExists = fs.existsSync(conf.i18nFilesPath)
 
-  if (outputPathExists) {
-    fs.rmSync(conf.i18nFilesPath, { recursive: true, force: true })
+  if (!outputPathExists) {
+    fs.mkdirSync(conf.i18nFilesPath)
   }
-
-  fs.mkdirSync(conf.i18nFilesPath)
   
   langFiles.forEach(lf => {
     fs.writeFileSync(`${conf.i18nFilesPath}/${lf.name}.${FileTypes.JSON}`, JSON.stringify(lf.file))

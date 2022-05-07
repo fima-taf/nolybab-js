@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 
-import fs from 'fs'
-import { dirname } from 'path';
 import yargs from 'yargs'
 import chalk from 'chalk'
 import { processI18nToCsv } from './to-csv'
-import { MissingKeys, Configuration } from './types'
+import { Configuration } from './types'
 import { processCsvToI18n } from './to-i18n';
 
 
@@ -15,7 +13,7 @@ const main = async () => {
     yargs
    .usage("Usage: -a <action>")
    .option('a', { alias: 'action', describe: 'The action to be executed. to-csv | to-i18n', type: 'string', demandOption: true})
-   .option('m', { alias: 'main-file-name', describe: "The name of the main i18n file", type: 'string', default: 'en'})
+   .option('m', { alias: 'i18n-main-file-name', describe: "The name of the main i18n file", type: 'string', default: 'en'})
    .option('i', { alias: 'i18n-files-path', describe: "The path to the i18n files", type: 'string', default: 'src/languages'})
    .option('c', { alias: 'csv-delimiter', describe: "The csv delimiter", type: 'string', default: ','})
    .option('n', { alias: 'translations-file-name', describe: "The name of the csv translations file", type: 'string', default: 'nolybab'})

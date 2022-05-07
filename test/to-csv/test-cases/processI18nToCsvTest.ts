@@ -8,15 +8,24 @@ export const processI18nToCsvTest = () => {
     mainFileName: 'en',
     i18nFilesPath: 'src/languages',
     translationsFileName: 'i18n-test',
+    translationsFilePath: 'src/lang',
     csvDelimiter: ','
   } as Configuration
 
   beforeAll(() => {
-    const pathExists = fs.existsSync(mockedConf.i18nFilesPath)
+    const i18nPathExists = fs.existsSync(mockedConf.i18nFilesPath)
 
-    if (pathExists) {
+    if (i18nPathExists) {
       fs.rmSync(mockedConf.i18nFilesPath, { recursive: true, force: true })
     }
+
+    const csvPathExists = fs.existsSync(mockedConf.translationsFilePath)
+
+    if (csvPathExists) {
+      fs.rmSync(mockedConf.translationsFilePath, { recursive: true, force: true })
+    }
+
+    fs.mkdirSync(mockedConf.translationsFilePath)
 
     fs.mkdirSync(mockedConf.i18nFilesPath)
     fs.writeFileSync(`${mockedConf.i18nFilesPath}/en.${FileTypes.JSON}`, JSON.stringify(en))
@@ -29,13 +38,13 @@ export const processI18nToCsvTest = () => {
   })
 
   afterEach(() => {
-    fs.rmSync(`${mockedConf.i18nFilesPath}/${mockedConf.translationsFileName}.${FileTypes.CSV}`)
+    fs.rmSync(`${mockedConf.translationsFilePath}/${mockedConf.translationsFileName}.${FileTypes.CSV}`)
   })
 
   test('Run full i18n-to-csv process', () => {
     processI18nToCsv(mockedConf)
 
-    const outputFile = fs.readFileSync(`${mockedConf.i18nFilesPath}/${mockedConf.translationsFileName}.${FileTypes.CSV}`)
+    const outputFile = fs.readFileSync(`${mockedConf.translationsFilePath}/${mockedConf.translationsFileName}.${FileTypes.CSV}`)
 
     expect(outputFile).toBeTruthy()
 
@@ -48,7 +57,7 @@ export const processI18nToCsvTest = () => {
 
     processI18nToCsv(mockedConf)
 
-    const outputFile = fs.readFileSync(`${mockedConf.i18nFilesPath}/${mockedConf.translationsFileName}.${FileTypes.CSV}`)
+    const outputFile = fs.readFileSync(`${mockedConf.translationsFilePath}/${mockedConf.translationsFileName}.${FileTypes.CSV}`)
 
     expect(outputFile).toBeTruthy()
 

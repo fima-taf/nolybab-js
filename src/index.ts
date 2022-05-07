@@ -16,8 +16,8 @@ const main = async () => {
    .option('m', { alias: 'i18n-main-file-name', describe: "The name of the main i18n file", type: 'string', default: 'en'})
    .option('i', { alias: 'i18n-files-path', describe: "The path to the i18n files", type: 'string', default: 'src/languages'})
    .option('c', { alias: 'csv-delimiter', describe: "The csv delimiter", type: 'string', default: ','})
-   .option('n', { alias: 'translations-file-name', describe: "The name of the csv translations file", type: 'string', default: 'nolybab'})
-   .option('p', { alias: 'translations-file-path', describe: "The path to the csv translations file", type: 'string', default: 'src/languages'})
+   .option('n', { alias: 'csv-file-name', describe: "The name of the csv translations file", type: 'string', default: 'nolybab'})
+   .option('p', { alias: 'csv-file-path', describe: "The path to the csv translations file", type: 'string', default: 'src/languages'})
    .argv;
   
   const optionsResult = await options
@@ -25,9 +25,9 @@ const main = async () => {
   const configuration = {
     mainFileName: optionsResult.m,
     i18nFilesPath: optionsResult.i,
-    translationsFileName: optionsResult.n,
+    csvFileName: optionsResult.n,
     csvDelimiter: optionsResult.c,
-    translationsFilePath: optionsResult.p
+    csvFilePath: optionsResult.p
   } as Configuration
   
   try {

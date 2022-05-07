@@ -29,13 +29,13 @@ export const processI18nToCsv = (conf: Configuration) => {
 
   csvRows.unshift([' '].concat(headersRow))
 
-  const csvFilePath = fs.existsSync(conf.translationsFilePath)
+  const csvFilePath = fs.existsSync(conf.csvFilePath)
 
   if (!csvFilePath) {
-    fs.mkdirSync(conf.translationsFilePath)
+    fs.mkdirSync(conf.csvFilePath)
   }
 
-  fs.writeFileSync(`${conf.translationsFilePath}/${conf.translationsFileName}.${FileTypes.CSV}`, csvRows.map(e => e.join(conf.csvDelimiter)).join("\n"))
+  fs.writeFileSync(`${conf.csvFilePath}/${conf.csvFileName}.${FileTypes.CSV}`, csvRows.map(e => e.join(conf.csvDelimiter)).join("\n"))
 
   console.log(chalk.blue('i18n-to-csv process has ended successfully'))
 }

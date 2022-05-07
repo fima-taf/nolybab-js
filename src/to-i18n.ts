@@ -6,15 +6,15 @@ import fs, { writeFileSync } from 'fs'
 export const processCsvToI18n = async (conf: Configuration) => {
   console.log(chalk.blue('Starting csv-to-i18n process'))
 
-  const translationsFilePath = `${conf.translationsFilePath}/${conf.translationsFileName}.${FileTypes.CSV}`
+  const csvFilePath = `${conf.csvFilePath}/${conf.csvFileName}.${FileTypes.CSV}`
 
-  const pathExists = fs.existsSync(translationsFilePath)
+  const pathExists = fs.existsSync(csvFilePath)
 
   if (!pathExists) {
-    throw new Error(`The translations file ${conf.translationsFileName} wasn't found in ${conf.translationsFilePath}`)
+    throw new Error(`The translations file ${conf.csvFileName} wasn't found in ${conf.csvFilePath}`)
   }
 
-  const csvString = fs.readFileSync(translationsFilePath).toString()
+  const csvString = fs.readFileSync(csvFilePath).toString()
 
   const csvRows = convertCsvToArray(csvString, conf.csvDelimiter)
 

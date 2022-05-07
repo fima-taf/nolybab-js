@@ -7,8 +7,8 @@ export const processI18nToCsvTest = () => {
   const mockedConf = {
     mainFileName: 'en',
     i18nFilesPath: 'src/languages',
-    translationsFileName: 'i18n-test',
-    translationsFilePath: 'src/lang',
+    csvFileName: 'i18n-test',
+    csvFilePath: 'src/lang',
     csvDelimiter: ','
   } as Configuration
 
@@ -19,13 +19,13 @@ export const processI18nToCsvTest = () => {
       fs.rmSync(mockedConf.i18nFilesPath, { recursive: true, force: true })
     }
 
-    const csvPathExists = fs.existsSync(mockedConf.translationsFilePath)
+    const csvPathExists = fs.existsSync(mockedConf.csvFilePath)
 
     if (csvPathExists) {
-      fs.rmSync(mockedConf.translationsFilePath, { recursive: true, force: true })
+      fs.rmSync(mockedConf.csvFilePath, { recursive: true, force: true })
     }
 
-    fs.mkdirSync(mockedConf.translationsFilePath)
+    fs.mkdirSync(mockedConf.csvFilePath)
 
     fs.mkdirSync(mockedConf.i18nFilesPath)
     fs.writeFileSync(`${mockedConf.i18nFilesPath}/en.${FileTypes.JSON}`, JSON.stringify(en))
@@ -38,13 +38,13 @@ export const processI18nToCsvTest = () => {
   })
 
   afterEach(() => {
-    fs.rmSync(`${mockedConf.translationsFilePath}/${mockedConf.translationsFileName}.${FileTypes.CSV}`)
+    fs.rmSync(`${mockedConf.csvFilePath}/${mockedConf.csvFileName}.${FileTypes.CSV}`)
   })
 
   test('Run full i18n-to-csv process', () => {
     processI18nToCsv(mockedConf)
 
-    const outputFile = fs.readFileSync(`${mockedConf.translationsFilePath}/${mockedConf.translationsFileName}.${FileTypes.CSV}`)
+    const outputFile = fs.readFileSync(`${mockedConf.csvFilePath}/${mockedConf.csvFileName}.${FileTypes.CSV}`)
 
     expect(outputFile).toBeTruthy()
 
@@ -57,7 +57,7 @@ export const processI18nToCsvTest = () => {
 
     processI18nToCsv(mockedConf)
 
-    const outputFile = fs.readFileSync(`${mockedConf.translationsFilePath}/${mockedConf.translationsFileName}.${FileTypes.CSV}`)
+    const outputFile = fs.readFileSync(`${mockedConf.csvFilePath}/${mockedConf.csvFileName}.${FileTypes.CSV}`)
 
     expect(outputFile).toBeTruthy()
 

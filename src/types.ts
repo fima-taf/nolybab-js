@@ -12,9 +12,9 @@ export type MissingKeys = {
 export type Configuration = {
   mainFileName: string
   i18nFilesPath: string,
-  translationsFileName: string,
+  csvFileName: string,
   csvDelimiter: string,
-  translationsFilePath: string
+  csvFilePath: string
 }
 
 export enum FileTypes {

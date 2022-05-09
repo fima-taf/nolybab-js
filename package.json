@@ -5,8 +5,8 @@
   "main": "./lib/index.js",
   "scripts": {
     "test": "npx jest",
-    "dev": "ts-node src/index.ts -a to-i18n -p src/lang",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "nolybab",

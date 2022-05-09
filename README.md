@@ -135,7 +135,7 @@ Will be converted into the following csv file:
   home.body.contact_us,Contact us,Contacta con nosotros,Nous contacter
   ```
 
-  ![CSV file]((https://user-images.githubusercontent.com/18335346/167492345-ee742731-9f66-4a8f-9f79-a6b37115fc91.png)
+  ![CSV file](https://user-images.githubusercontent.com/18335346/167492345-ee742731-9f66-4a8f-9f79-a6b37115fc91.png)
 
 </details>
 

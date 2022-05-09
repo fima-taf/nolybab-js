@@ -38,7 +38,7 @@ The following i18n json files:
 <details>
   <summary>Click to see</summary>
 
-  ```
+  ```js
   export const en = {
     hello: 'Hello',
     yes: 'Yes',

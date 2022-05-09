@@ -8,6 +8,13 @@
     "dev": "ts-node src/index.ts -a to-i18n -p src/lang",
     "build": "tsc -p ."
   },
+  "keywords": [
+    "nolybab",
+    "i18n",
+    "csv",
+    "i18n-to-csv",
+    "csv-to-i18n"
+  ],
   "author": "fima.apps@gmail.com",
   "license": "MIT",
   "dependencies": {
@@ -25,5 +32,13 @@
   },
   "bin": {
     "nolybab": "./lib/index.js"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fima-taf/nolybab-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fima-taf/nolybab-js/issues"
+  },
+  "homepage": "https://github.com/fima-taf/nolybab-js#readme"
 }

@@ -12,7 +12,7 @@ This tool allow you to quickly convert all your i18n (json) files in your projec
 
 ## Install
 ```
- 
+npm install nolybab-js
 ```
 
 ## Usage

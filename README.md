@@ -17,8 +17,10 @@ npm install nolybab-js
 
 ## Usage
 ```
-nolybab -a to-csv 
-
+npx nolybab -a to-csv
+npx nolybab -a to-i18n
+```
+```
 Options:
   -a, --action                  The action to be executed. to-csv | to-i18n
                                                              [string] [required]
@@ -34,7 +36,7 @@ Options:
 ```
 
 ## Examples
-The following i18n json files:
+Running the command `npx nolybab -a to-csv` will convert the following i18n json files:
 <details>
   <summary>Click to see</summary>
 
@@ -116,7 +118,7 @@ The following i18n json files:
   ```
 </details>
 
-Will be converted into the following csv file:  
+into the following csv file: 
 
 <details>
   <summary>Click to see</summary>
@@ -138,6 +140,8 @@ Will be converted into the following csv file:
   ![CSV file](https://user-images.githubusercontent.com/18335346/167492345-ee742731-9f66-4a8f-9f79-a6b37115fc91.png)
 
 </details>
+
+Running the command `npx nolybab -a to-i18n` will convert the csv back into the i18n json files above
 
 ## License
 

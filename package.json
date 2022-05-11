@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "CLI based tool for converting i18n to csv and csv to i18n files",
   "main": "./lib/index.js",
+  "types": "./lib/types.d.ts",
   "scripts": {
     "test": "npx jest",
     "build": "tsc -p .",

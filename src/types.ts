@@ -22,3 +22,17 @@ export enum FileTypes {
   JSON = 'json'
 }
 
+export type ConfigurationProperty = {
+  name: string,
+  alias: string,
+  fixers?: ((option: string) => string)[]
+}
+
+export type ConfigurationProperties = {
+  i18nMainFileName: ConfigurationProperty
+  i18nFilesPath: ConfigurationProperty,
+  csvFileName: ConfigurationProperty,
+  csvDelimiter: ConfigurationProperty,
+  csvFilePath: ConfigurationProperty
+}
+

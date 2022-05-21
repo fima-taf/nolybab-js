@@ -11,7 +11,7 @@ export const processCsvToI18n = async (conf: Configuration) => {
   const pathExists = fs.existsSync(csvFilePath)
 
   if (!pathExists) {
-    throw new Error(`The translations file ${conf.csvFileName} wasn't found in ${conf.csvFilePath}`)
+    throw new Error(`The translations file '${conf.csvFileName}' wasn't found in '${conf.csvFilePath}'`)
   }
 
   const csvString = fs.readFileSync(csvFilePath).toString()

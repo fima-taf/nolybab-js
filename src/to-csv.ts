@@ -10,7 +10,7 @@ export const processI18nToCsv = (conf: Configuration) => {
   const pathExists = fs.existsSync(mainFilePath)
 
   if (!pathExists) {
-    throw new Error(`The main file ${conf.mainFileName} wasn't found in ${conf.i18nFilesPath}`)
+    throw new Error(`The main file '${conf.mainFileName}' wasn't found in '${conf.i18nFilesPath}'`)
   }
 
   let mainFile
@@ -49,7 +49,7 @@ export const loadLanguageFiles = (i18nFilesPath: string): LanguageFile[] => {
       if (langFile) {
         langFiles.push({name: f, file: JSON.parse(langFile)})
       } else {
-        throw new Error(`The language file ${f} wasn't found in ${i18nFilesPath}`)
+        throw new Error(`The language file '${f}' wasn't found in '${i18nFilesPath}'`)
       }
     }
   })

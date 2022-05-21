@@ -2,6 +2,10 @@
 node_modules
 .npmrc
 
+# Testing folders
+src/lang
+src/languages
+
 # Log files
 npm-debug.log*
 yarn-debug.log*

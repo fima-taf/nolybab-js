@@ -57,7 +57,7 @@ export const convertRowsIntoObject = (rows: any[], langFiles: LanguageFile[]) =>
     const row = rows[i]
     if (row[0]) {
       const translationObjectKeys = convertNolybabKeyToArray(row[0])
-      for (let j = 1; j < row.length; j++) {
+      for (let j = 1; j <= langFiles.length; j++) {
         const langFilesIndex = j-1
         langFiles[langFilesIndex].file = setValueIntoObject(translationObjectKeys, row[j], langFiles[langFilesIndex].file)
       }

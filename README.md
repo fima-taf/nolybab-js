@@ -24,7 +24,7 @@ npx nolybab -a to-i18n
 Options:
   -a, --action                  The action to be executed. to-csv | to-i18n
                                                              [string] [required]
-  -m, --main-file-name          The name of the main i18n file
+  -m, --i18n-main-file-name          The name of the main i18n file
                                                         [string] [default: "en"]
   -i, --i18n-files-path         The path to the i18n files
                                              [string] [default: "src/languages"]

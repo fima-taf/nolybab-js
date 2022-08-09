@@ -1,6 +1,6 @@
 import chalk from "chalk"
 import { Configuration, FileTypes, LanguageFile } from "./types"
-import fs, { writeFileSync } from 'fs'
+import fs from 'fs'
 
 
 export const processCsvToI18n = async (conf: Configuration) => {
@@ -34,12 +34,32 @@ export const convertCsvToArray = (csv: string, csvDelimiter: string) => {
     const result: any[] = []
     const rows = csv.split('\n')
     rows.forEach(r => {
-      result.push(r.split(csvDelimiter))
+      result.push(handleCsvDelimiter(r, csvDelimiter))
     })
     return result
   } else {
     throw new Error('The csv translations file is empty')
   }
+}
+
+export const handleCsvDelimiter = (row: string, csvDelimiter: string): string[] => {
+  const values = row.split(csvDelimiter);
+  const fixedValues: string[] = []
+  let mergedValue = ""
+  values.forEach(v => {
+    if (v.startsWith('"')) {
+      mergedValue = v.substring(1) + csvDelimiter;
+    } else if (v.endsWith('"')) {
+      mergedValue += v.substring(0, v.length - 1);
+      fixedValues.push(mergedValue)
+      mergedValue = ""
+    } else if (mergedValue.length) {
+      mergedValue += v + csvDelimiter
+    } else {
+      fixedValues.push(v)
+    }
+  })
+  return fixedValues
 }
 
 export const generateLangFiles = (headers: string[]) => {

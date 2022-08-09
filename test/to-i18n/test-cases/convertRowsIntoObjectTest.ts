@@ -12,7 +12,8 @@ export const convertRowsIntoObjectTest = () => {
       ['yes','Yes','Sí','Oui'],
       ['no','No','No','Non'],
       ['login.message','Please login','Por favor Iniciar sesión','Veuillez vous connecter'],
-      ['home.body.about.title','About','Acerca de','Sur']
+      ['home.body.about.title','About','Acerca de','Sur'],
+      ['home.body.description', 'A nice application, recommend to your friends!','¡Una buena aplicación, recomiéndala a tus amigos!','Une belle application, recommandez à vos amis!']
     ]
 
     const langFiles = [
@@ -22,9 +23,9 @@ export const convertRowsIntoObjectTest = () => {
     ] as LanguageFile[]
 
     const expected = [
-      {name: 'en', file: {hello: 'Hello', yes: 'Yes', no: 'No', login: {message: 'Please login'}, home: {body: {about: {title: 'About'}}}}},
-      {name: 'es', file: {hello: 'Hola', yes: 'Sí', no: 'No', login: {message: 'Por favor Iniciar sesión'}, home: {body: {about: {title: 'Acerca de'}}}}},
-      {name: 'fr', file: {hello: 'Bonjour', yes: 'Oui', no: 'Non', login: {message: 'Veuillez vous connecter'}, home: {body: {about: {title: 'Sur'}}}}},
+      {name: 'en', file: {hello: 'Hello', yes: 'Yes', no: 'No', login: {message: 'Please login'}, home: {body: {about: {title: 'About'}, description: 'A nice application, recommend to your friends!'}}}},
+      {name: 'es', file: {hello: 'Hola', yes: 'Sí', no: 'No', login: {message: 'Por favor Iniciar sesión'}, home: {body: {about: {title: 'Acerca de'}, description: '¡Una buena aplicación, recomiéndala a tus amigos!'}}}},
+      {name: 'fr', file: {hello: 'Bonjour', yes: 'Oui', no: 'Non', login: {message: 'Veuillez vous connecter'}, home: {body: {about: {title: 'Sur'}, description: 'Une belle application, recommandez à vos amis!'}}}},
     ]
 
 

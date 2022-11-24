@@ -10,8 +10,5 @@
     "types": ["node", "jest"],
     "esModuleInterop": true,
     "resolveJsonModule": true
-  },
-  "exclude": [
-    "test/**/*"
-  ]
+  }
 }

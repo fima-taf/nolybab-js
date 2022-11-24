@@ -1,5 +1,4 @@
 import { handleCsvDelimiter } from "../../../src/to-i18n"
-import { LanguageFile } from "../../../src/types"
 
 export const handleCsvDelimiterTest = () => {
   const delimiter = ','

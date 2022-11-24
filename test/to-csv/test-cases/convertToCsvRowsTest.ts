@@ -1,5 +1,5 @@
 import { convertToCsvRows } from "../../../src/to-csv"
-import { FileTypes } from "../../../src/types"
+import { FileTypes, LanguageFile } from "../../../src/types"
 
 export const convertToCsvRowsTest = () => {
 
@@ -27,7 +27,7 @@ export const convertToCsvRowsTest = () => {
       {name: `fr.${FileTypes.JSON}`, file: {hello: 'Bonjour', yes: 'Oui', no: 'Non'}},
       {name: `es.${FileTypes.JSON}`, file: {hello: 'Hola', no: 'No'}},
       {name: `de.${FileTypes.JSON}`, file: {hello: 'Hallo', yes: 'Ja'}},
-    ]
+    ] as LanguageFile[]
 
     expect(convertToCsvRows(mainFile, langFiles, delimiter)).toMatchObject([
       ['hello', 'Hello', 'Bonjour', 'Hola', 'Hallo'],

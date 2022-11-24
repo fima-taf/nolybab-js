@@ -4,6 +4,7 @@ export const handleCsvDelimiterTest = () => {
   const delimiter = ','
 
   test('Get value with delimiter', () => {
+    // eslint-disable-next-line no-useless-escape
     expect(handleCsvDelimiter(`some spreaded${delimiter} value`, delimiter)).toBe('\"some spreaded, value\"')
   })
 
@@ -16,7 +17,7 @@ export const handleCsvDelimiterTest = () => {
   })
 
   test('Get undefined value', () => {
-    expect(handleCsvDelimiter(undefined as any, delimiter)).toBe(undefined)
+    expect(handleCsvDelimiter(undefined, delimiter)).toBe(undefined)
   })
 
 }

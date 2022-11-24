@@ -1,4 +1,5 @@
-import { Configuration, ConfigurationProperties, ConfigurationProperty, FileTypes } from "./types"
+// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+import { ArgvOptions, Configuration, ConfigurationProperties, ConfigurationProperty, FileTypes } from "./types"
 
 const i18nMainFileName: ConfigurationProperty = {
   name: 'i18n-main-file-name',
@@ -38,7 +39,7 @@ const csvFilePath: ConfigurationProperty = {
 
 export const configurationProperties: ConfigurationProperties = { i18nMainFileName, i18nFilesPath, csvDelimiter, csvFileName, csvFilePath }
 
-export const getFixedConfiguration = (options: any) => {
+export const getFixedConfiguration = (options: ArgvOptions) => {
   const config: Configuration = {
     mainFileName: fixConfigurationValue(options[configurationProperties.i18nMainFileName.name], configurationProperties.i18nMainFileName),
     i18nFilesPath: fixConfigurationValue(options[configurationProperties.i18nFilesPath.name], configurationProperties.i18nFilesPath),

@@ -1,4 +1,5 @@
 import { extractKeysFromObject } from "../../../src/to-csv"
+import { I18nObject } from "../../../src/types"
 
 export const extractKeysFromObjectTest = () => {
 
@@ -59,7 +60,7 @@ export const extractKeysFromObjectTest = () => {
       key_3: {
         key_3_1: 'val_3_1'
       }
-    }
+    } as I18nObject
 
     const expectedResult = ['key_1', 'key_3.key_3_1']
 

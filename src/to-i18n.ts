@@ -1,6 +1,7 @@
 import chalk from "chalk"
-import { Configuration, FileTypes, LanguageFile } from "./types"
+import { Configuration, FileTypes, LanguageFile, I18nObject } from "./types"
 import fs from 'fs'
+import { getI18nObjectFromI18nObject } from "./Helpers"
 
 
 export const processCsvToI18n = async (conf: Configuration) => {
@@ -31,7 +32,7 @@ export const processCsvToI18n = async (conf: Configuration) => {
 
 export const convertCsvToArray = (csv: string, csvDelimiter: string) => {
   if (csv && csv.length) {
-    const result: any[] = []
+    const result: string[][] = []
     const rows = csv.split('\n')
     rows.forEach(r => {
       result.push(handleCsvDelimiter(r, csvDelimiter))
@@ -72,7 +73,7 @@ export const generateLangFiles = (headers: string[]) => {
   return result
 }
 
-export const convertRowsIntoObject = (rows: any[], langFiles: LanguageFile[]) => {
+export const convertRowsIntoObject = (rows: string[][], langFiles: LanguageFile[]) => {
   for (let i = 1; i < rows.length; i++) {
     const row = rows[i]
     if (row[0]) {
@@ -90,19 +91,19 @@ export const convertNolybabKeyToArray = (nolybabKey: string) => {
   return nolybabKey.split('.')
 }
 
-export const setValueIntoObject = (keys: string[], value: string, object: any): any => {
-  const keysCopy = Object.assign([], keys)
+export const setValueIntoObject = (keys: string[], value: string, obj: I18nObject): I18nObject => {
+  const keysCopy = Object.assign([] as string[], keys)
   const currentKey = keysCopy.shift()
   if (currentKey !== undefined) {
     if (keysCopy.length > 0) {
-      object[currentKey] = setValueIntoObject(keysCopy, value, object[currentKey] || {})
+      obj[currentKey] = setValueIntoObject(keysCopy, value, getI18nObjectFromI18nObject(obj[currentKey]))
     } else {
       if (value) {
-        object[currentKey] = value
+        obj[currentKey] = value
       }
     }
   }
-  return object
+  return obj
 }
 
 export const writeLanguageFiles = async (conf: Configuration, langFiles: LanguageFile[]) => {

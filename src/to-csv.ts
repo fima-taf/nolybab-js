@@ -1,6 +1,7 @@
 import fs from 'fs'
-import { LanguageFile, Configuration, FileTypes } from './types'
+import { LanguageFile, Configuration, FileTypes, I18nObject } from './types'
 import chalk from 'chalk'
+import { getI18nObjectFromI18nObject, getStringFromI18nObject } from './Helpers'
 
 export const processI18nToCsv = (conf: Configuration) => {
   console.log(chalk.blue('Starting i18n-to-csv process'))
@@ -13,9 +14,9 @@ export const processI18nToCsv = (conf: Configuration) => {
     throw new Error(`The main file '${conf.mainFileName}' wasn't found in '${conf.i18nFilesPath}'`)
   }
 
-  let mainFile
+  let mainFile: I18nObject
   try {
-    mainFile = JSON.parse(fs.readFileSync(mainFilePath).toString());
+    mainFile = JSON.parse(fs.readFileSync(mainFilePath).toString()) as I18nObject;
   } catch (e) {
     throw new Error('Failed to parse the JSON object of the main file')
   }
@@ -47,7 +48,7 @@ export const loadLanguageFiles = (i18nFilesPath: string): LanguageFile[] => {
     if (f.includes(`.${FileTypes.JSON}`)) {
       const langFile = fs.readFileSync(`${i18nFilesPath}/${f}`, {encoding: 'utf-8'})
       if (langFile) {
-        langFiles.push({name: f, file: JSON.parse(langFile)})
+        langFiles.push({name: f, file: JSON.parse(langFile) as I18nObject})
       } else {
         throw new Error(`The language file '${f}' wasn't found in '${i18nFilesPath}'`)
       }
@@ -61,7 +62,7 @@ export const generateHeadersRow = (langFiles: LanguageFile[]) => {
   return langFiles.map(f => f.name.replace(`.${FileTypes.JSON}`, ''))
 }
 
-export const convertToCsvRows = (mainFile: any, langFiles: LanguageFile[], csvDelimiter: string) => {
+export const convertToCsvRows = (mainFile: I18nObject, langFiles: LanguageFile[], csvDelimiter: string) => {
   const mainFileKeys = extractKeysFromObject(mainFile)
   const resultRows = []
 
@@ -80,7 +81,7 @@ export const convertToCsvRows = (mainFile: any, langFiles: LanguageFile[], csvDe
   return resultRows
 }
 
-export const extractKeysFromObject = (obj: any, parentKeyName?: string) => {
+export const extractKeysFromObject = (obj: I18nObject, parentKeyName?: string) => {
   let result: string[] = []
   for (const key of Object.keys(obj)) {
     const value = obj[key]
@@ -100,21 +101,20 @@ export const getNolybabKeyName = (key: string, parentKey?: string) => {
   return parentKey ? `${parentKey}.${key}` : key
 }
 
-export const extractValueFromObject = (obj: any, splitKey: string[], delimiter: string): any => {
+export const extractValueFromObject = (obj: I18nObject, splitKey: string[], delimiter: string): I18nObject | string | undefined => {
   const parentKey = splitKey[0]
   if (splitKey.length === 1) {
-    return handleCsvDelimiter(obj[parentKey], delimiter)
+    return handleCsvDelimiter(getStringFromI18nObject(obj[parentKey]), delimiter)
   } else {
     if (obj[parentKey] === undefined) {
       return
     } else {
       splitKey.shift()
-      return extractValueFromObject(obj[parentKey], splitKey, delimiter)
+      return extractValueFromObject(getI18nObjectFromI18nObject(obj[parentKey]), splitKey, delimiter)
     }
   }
 }
 
-
-export const handleCsvDelimiter = (value: string, delimiter: string) => {
-  return value && value.includes(delimiter) ? `\"${value}\"` : value
+export const handleCsvDelimiter = (value: string | undefined, delimiter: string) => {
+  return value && value.includes(delimiter) ? `"${value}"` : value
 }

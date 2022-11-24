@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 
-import yargs from 'yargs'
+import yargs, { Argv } from 'yargs'
 import chalk from 'chalk'
 import { processI18nToCsv } from './to-csv'
 import { processCsvToI18n } from './to-i18n';
 import { configurationProperties as confProps, getFixedConfiguration } from './configurationsHelper';
+import { ArgvOptions } from './types';
 
 
 export const main = async () => {
 
-  const options = 
+  const options: Argv = 
     yargs
    .usage("Usage: -a <action>")
    .option('action', { alias: 'a', describe: 'The action to be executed. to-csv | to-i18n', type: 'string', demandOption: true})
@@ -18,11 +19,10 @@ export const main = async () => {
    .option(confProps.csvDelimiter.name, { alias: confProps.csvDelimiter.alias, describe: "The csv delimiter", type: 'string', default: ','})
    .option(confProps.csvFileName.name, { alias: confProps.csvFileName.alias, describe: "The name of the csv translations file", type: 'string', default: 'nolybab'})
    .option(confProps.csvFilePath.name, { alias: confProps.csvFilePath.alias, describe: "The path to the csv translations file", type: 'string', default: 'src/languages'})
-   .argv;
-  
-  const optionsResult = await options
 
-  const configuration = getFixedConfiguration(optionsResult)
+  const optionsResult = await options.argv
+
+  const configuration = getFixedConfiguration(optionsResult as ArgvOptions)
   
   try {
     if (optionsResult.a === 'to-csv') {

@@ -43,20 +43,52 @@ export const convertCsvToArray = (csv: string, csvDelimiter: string) => {
   }
 }
 
-export const handleCsvData = (row: string, csvDelimiter: string): string[] => {
-  const values = row.split(csvDelimiter);
-  const fixedValues: string[] = []
-  values.forEach(v => {
-    let mergedValue = v;
+//@see https://gist.github.com/rakeden/508ca124fabe97eba6d5734f2efcea32
+export const handleCsvData = (row: string, csvDelimiter: string) => {
+  csvDelimiter = (csvDelimiter || ",");
 
-    if (v.startsWith('"') && v.endsWith('"')) {
-      mergedValue = v.substring(1, v.length - 1);
-      mergedValue = mergedValue.replace(/""/g, '"');
+  const csvRegex = new RegExp(
+      (
+          // Delimiters.
+          "(\\" + csvDelimiter + "|\\r?\\n|\\r|^)" +
+
+          // Quoted fields.
+          "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+
+          // Standard fields.
+          "([^\"\\" + csvDelimiter + "\\r\\n]*))"
+      ),
+      "gi"
+  );
+
+  const arrData: string[] = [];
+
+  let arrMatches = null;
+
+  while ((arrMatches = csvRegex.exec(row))) {
+    let strMatchedValue;
+
+    // Now that we have our delimiter out of the way,
+    // let's check to see which kind of value we
+    // captured (quoted or unquoted).
+    if (arrMatches[2]) {
+
+      // We found a quoted value. When we capture
+      // this value, unescape any double quotes.
+      strMatchedValue = arrMatches[2].replace(
+          new RegExp("\"\"", "g"),
+          "\""
+      );
+
+    } else {
+      // We found a non-quoted value.
+      strMatchedValue = arrMatches[3];
     }
 
-    fixedValues.push(mergedValue);
-  })
-  return fixedValues
+    arrData.push(strMatchedValue);
+  }
+
+  return arrData;
 }
 
 export const generateLangFiles = (headers: string[]) => {

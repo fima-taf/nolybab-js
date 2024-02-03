@@ -45,4 +45,18 @@ export const handleCsvDataTest = () => {
     expect(handleCsvData(csvRows, delimiter)).toEqual(expected)
   })
 
+  test('Convert strings with wrapper in content', () => {
+    const csvRows = 'home.body.description,"A ""nice"", application, recommend to your, friends!","¡Una ""buena"", aplicación, recomiéndala a tus, amigos!","Une ""belle"", application, recommandez à vos, amis!"'
+
+
+    const expected = [
+      'home.body.description',
+      'A "nice", application, recommend to your, friends!',
+      '¡Una "buena", aplicación, recomiéndala a tus, amigos!',
+      'Une "belle", application, recommandez à vos, amis!'
+    ]
+
+    expect(handleCsvData(csvRows, delimiter)).toEqual(expected)
+  })
+
 }

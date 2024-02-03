@@ -11,6 +11,10 @@ export const handleCsvWrapperTest = () => {
   test('Get value without delimiter', () => {
     expect(handleCsvWrapper('some value')).toBe('"some value"')
   })
+
+  test('Get value with wrapper in content', () => {
+    expect(handleCsvWrapper('some "super" value')).toBe('"some ""super"" value"')
+  })
   
   test('Get complex value without potential delimiter', () => {
     expect(handleCsvWrapper('some value. and some potential delimiter;')).toBe('"some value. and some potential delimiter;"')

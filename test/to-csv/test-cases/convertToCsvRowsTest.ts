@@ -13,9 +13,9 @@ export const convertToCsvRowsTest = () => {
     ]
 
     expect(convertToCsvRows(mainFile, langFiles, delimiter)).toMatchObject([
-      ['hello', 'Hello', 'Bonjour', 'Hola'],
-      ['yes', 'Yes', 'Oui', 'Sí'],
-      ['no', 'No', 'Non', 'No']
+      ['hello', '"Hello"', '"Bonjour"', '"Hola"'],
+      ['yes', '"Yes"', '"Oui"', '"Sí"'],
+      ['no', '"No"', '"Non"', '"No"']
     ])
   })
 
@@ -30,9 +30,9 @@ export const convertToCsvRowsTest = () => {
     ] as LanguageFile[]
 
     expect(convertToCsvRows(mainFile, langFiles, delimiter)).toMatchObject([
-      ['hello', 'Hello', 'Bonjour', 'Hola', 'Hallo'],
-      ['yes', 'Yes', 'Oui', undefined, 'Ja'],
-      ['no', 'No', 'Non', 'No', undefined]
+      ['hello', '"Hello"', '"Bonjour"', '"Hola"', '"Hallo"'],
+      ['yes', '"Yes"', '"Oui"', undefined, '"Ja"'],
+      ['no', '"No"', '"Non"', '"No"', undefined]
     ])
   })
 }

@@ -1,6 +1,6 @@
-import { handleCsvDelimiter } from "../../../src/to-i18n"
+import { handleCsvData } from "../../../src/to-i18n"
 
-export const handleCsvDelimiterTest = () => {
+export const handleCsvDataTest = () => {
   const delimiter = ','
 
   test('Get simple strings from csv', () => {
@@ -13,7 +13,7 @@ export const handleCsvDelimiterTest = () => {
       'Veuillez vous connecter'
     ]
 
-    expect(handleCsvDelimiter(csvRow, delimiter)).toEqual(expected)
+    expect(handleCsvData(csvRow, delimiter)).toEqual(expected)
 
   })
 
@@ -27,7 +27,7 @@ export const handleCsvDelimiterTest = () => {
       'Une belle application, recommandez à vos amis!'
     ]
 
-    expect(handleCsvDelimiter(csvRow, delimiter)).toEqual(expected)
+    expect(handleCsvData(csvRow, delimiter)).toEqual(expected)
 
   })
 
@@ -42,7 +42,7 @@ export const handleCsvDelimiterTest = () => {
       'Une belle, application, recommandez à vos, amis!'
     ]
 
-    expect(handleCsvDelimiter(csvRows, delimiter)).toEqual(expected)
+    expect(handleCsvData(csvRows, delimiter)).toEqual(expected)
   })
 
 }

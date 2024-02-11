@@ -1,6 +1,6 @@
 {
   "name": "nolybab-js",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "CLI based tool for converting i18n to csv and csv to i18n files",
   "main": "./lib/index.js",
   "types": "./lib/types.d.ts",

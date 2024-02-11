@@ -1,5 +1,5 @@
 import { generateHeadersRow, getNolybabKeyName } from '../../src/to-csv'
-import { handleCsvDelimiterTest } from './test-cases/handleCsvDelimiterTest'
+import { handleCsvWrapperTest } from './test-cases/handleCsvWrapperTest'
 import { extractKeysFromObjectTest } from './test-cases/extractKeysFromObjectTest'
 import { convertToCsvRowsTest } from './test-cases/convertToCsvRowsTest'
 import { extractValueFromObjectTest } from './test-cases/extractValueFromObjectTest'
@@ -21,7 +21,7 @@ describe("I18n to CSV tests", () => {
 
   })
 
-  describe('Unit - handleCsvDelimiter()', handleCsvDelimiterTest)
+  describe('Unit - handleCsvWrapper()', handleCsvWrapperTest)
 
   describe('Unit - extractKeysFromObject()', extractKeysFromObjectTest)
 

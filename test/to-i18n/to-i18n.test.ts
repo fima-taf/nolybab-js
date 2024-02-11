@@ -5,7 +5,7 @@ import { LanguageFile } from "../../src/types"
 import { setValueIntoObjectTest } from "./test-cases/setValueIntoObjectTest"
 import { convertRowsIntoObjectTest } from "./test-cases/convertRowsIntoObjectTest"
 import { writeLanguageFilesTest } from "./test-cases/writeLanguageFilesTest"
-import { handleCsvDelimiterTest } from "./test-cases/handleCsvDelimiterTest"
+import { handleCsvDataTest } from "./test-cases/handleCsvDataTest"
 
 
 describe('CSV to i18n tests', () => {
@@ -50,5 +50,5 @@ describe('CSV to i18n tests', () => {
 
   describe('Unit - writeLanguageFilesTest()', writeLanguageFilesTest)
 
-  describe('Unit - handleCsvDelimiterTest', handleCsvDelimiterTest)
+  describe('Unit - handleCsvDataTest()', handleCsvDataTest)
 })

@@ -104,7 +104,7 @@ export const getNolybabKeyName = (key: string, parentKey?: string) => {
 export const extractValueFromObject = (obj: I18nObject, splitKey: string[], delimiter: string): I18nObject | string | undefined => {
   const parentKey = splitKey[0]
   if (splitKey.length === 1) {
-    return handleCsvDelimiter(getStringFromI18nObject(obj[parentKey]), delimiter)
+    return handleCsvWrapper(getStringFromI18nObject(obj[parentKey]))
   } else {
     if (obj[parentKey] === undefined) {
       return
@@ -115,6 +115,6 @@ export const extractValueFromObject = (obj: I18nObject, splitKey: string[], deli
   }
 }
 
-export const handleCsvDelimiter = (value: string | undefined, delimiter: string) => {
-  return value && value.includes(delimiter) ? `"${value}"` : value
+export const handleCsvWrapper = (value: string | undefined) => {
+  return value && `"${value?.replace(/"/g, '""')}"`;
 }

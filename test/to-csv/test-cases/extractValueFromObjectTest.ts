@@ -11,7 +11,7 @@ export const extractValueFromObjectTest = () => {
       key_4: 'val_4',
     }
 
-    expect(extractValueFromObject(simpleObject, ['key_1'], delimiter)).toBe('val_1')
+    expect(extractValueFromObject(simpleObject, ['key_1'], delimiter)).toBe('"val_1"')
   })
 
   test('Get value with deep key', () => {
@@ -23,6 +23,6 @@ export const extractValueFromObjectTest = () => {
       }
     }
 
-    expect(extractValueFromObject(deepObject, ['key_3', 'key_3_1'], delimiter)).toBe('val_3_1')
+    expect(extractValueFromObject(deepObject, ['key_3', 'key_3_1'], delimiter)).toBe('"val_3_1"')
   })
 }
